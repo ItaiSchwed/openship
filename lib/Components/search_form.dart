@@ -7,11 +7,15 @@ class SearchForm extends StatefulWidget {
 }
 
 class _SearchFormState extends State<SearchForm> {
+  DateTime dateTime;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        DatePicker(),
+        DatePicker(
+                (DateTime pickedTime){
+          dateTime = pickedTime;
+        }, label: 'departures later then'),
         TextField(
           decoration: InputDecoration(
             labelText: "Search",

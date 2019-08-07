@@ -1,0 +1,242 @@
+openapi: "3.0.1"
+info:
+  title: "openship"
+  version: "0.1.0"
+servers:
+  - url: "https://m00uznujve.execute-api.eu-central-1.amazonaws.com/{basePath}"
+    variables:
+      basePath:
+        default: "/alpha"
+
+tags:
+  - name: Shipment
+  - name: Bid
+  - name: Sale
+
+paths:
+  /shipments:
+    get:
+      tags:
+        - Shipment
+      parameters:
+        - in: query
+          name: sellerId
+          schema:
+            type: string
+        - in: query
+          name: departDate
+          schema:
+            type: string
+        - in: query
+          name: arriveDate
+          schema:
+            type: string
+        - in: query
+          name: srcPort
+          schema:
+            type: string
+        - in: query
+          name: dstPort
+          schema:
+            type: string
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: '#/components/schemas/Shipment'
+    post:
+      tags:
+        - Shipment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Shipment'
+      responses:
+        200:
+          description: "200 response"
+
+  /shipments/{id}:
+    get:
+      tags:
+        - Shipment
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+
+  /bids:
+    get:
+      tags:
+        - Bid
+      parameters:
+        - in: query
+          name: buyerId
+          schema:
+            type: string
+        - in: query
+          name: sellerId
+          schema:
+            type: string
+        - in: query
+          name: shipmentId
+          schema:
+            type: string
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: '#/components/schemas/Bid'
+    post:
+      tags:
+        - Bid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bid'
+      responses:
+        200:
+          description: "200 response"
+  /bids/{id}:
+    get:
+      tags:
+        - Bid
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bid'
+
+  /sales:
+    get:
+      tags:
+        - Sale
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                type: "array"
+                items:
+                  $ref: '#/components/schemas/Sale'
+    post:
+      tags:
+        - Sale
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Sale'
+      responses:
+        200:
+          description: "200 response"
+  /sales/{id}:
+    get:
+      tags:
+        - Sale
+      parameters:
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        200:
+          description: "200 response"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sale'
+
+components:
+  schemas:
+    Shipment:
+      title: "Shipment"
+      type: "object"
+      properties:
+        id:
+          type: "string"
+        sellerId:
+          type: string
+        srcPort:
+          type: "string"
+        dstPort:
+          type: "string"
+        dimensions:
+          type: "object"
+          properties:
+            width:
+              type: "integer"
+            length:
+              type: "integer"
+            height:
+              type: "integer"
+        price:
+          type: integer
+        departDate:
+          type: string
+        arriveDate:
+          type: string
+    Bid:
+      title: "Bid"
+      type: "object"
+      properties:
+        id:
+          type: string
+        buyerId:
+          type: string
+        shipmentId:
+          type: string
+        dimensions:
+          type: "object"
+          properties:
+            width:
+              type: "integer"
+            length:
+              type: "integer"
+            height:
+              type: "integer"
+    Sale:
+      title: "Sale"
+      type: object
+      properties:
+        id:
+          type: string
+        buyerId:
+          type: string
+        sellerId:
+          type: string
+        shipmentId:
+          type: string
+        bidId:
+          type: string
