@@ -29,12 +29,20 @@ class _DatePickerState extends State<DatePicker> {
       onTap: _selectDate,
       child: Row(
         children: <Widget>[
+          Padding(
+            padding:
+                EdgeInsets.only(right: 13,),
+            child: Icon(
+              Icons.date_range,
+              color: Colors.grey,
+              size: 28,
+            ),
+          ),
           Text(
             widget.label + " ",
-            style: TextStyle(fontSize: 17.0,
-            color: Colors.black.withOpacity(0.5)),
+            style:
+                TextStyle(fontSize: 17.0, color: Colors.black.withOpacity(0.5)),
           ),
-          Icon(Icons.date_range, color: Colors.blue),
         ],
       ),
     );

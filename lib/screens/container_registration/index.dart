@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
+import 'package:openship/Components/date_picker.dart';
 
 
 class ContainerRegistration extends StatelessWidget {
@@ -29,7 +31,9 @@ class _MyHomePageState extends State<MyHomePage> {
   String _color = '';
 
   String departurePort = '';
-
+  DateTime departures = DateTime.now();
+  DateTime arrives = DateTime.now();
+  final formatter = new DateFormat('dd-MM-yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -46,25 +50,24 @@ class _MyHomePageState extends State<MyHomePage> {
               child: new ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 children: <Widget>[
-                  new TextFormField(
-
+                  new TextField(
                     decoration: const InputDecoration(
-                      icon: const Icon(Icons.person),
+                      icon: const Icon(Icons.subdirectory_arrow_right),
                       hintText: 'Enter your departure port',
                       labelText: 'Departure port  :',
                     ),
                   ),
-                  new TextFormField(
+                  new TextField(
                     decoration: const InputDecoration(
-                      icon: const Icon(Icons.calendar_today),
+                      icon: const Icon(Icons.subdirectory_arrow_left),
                       hintText: 'Enter your destination port',
                       labelText: 'Destination port',
                     ),
                     keyboardType: TextInputType.datetime,
                   ),
-                  new TextFormField(
+                  new TextField(
                     decoration: const InputDecoration(
-                      icon: const Icon(Icons.phone),
+                      icon: const Icon(Icons.crop_free),
                       hintText: 'Enter free space in digits',
                       labelText: 'Container free space :',
                     ),
@@ -73,60 +76,47 @@ class _MyHomePageState extends State<MyHomePage> {
 //                      WhitelistingTextInputFormatter.digitsOnly,
 //                    ],
                   ),
-                  new TextFormField(
-                    decoration: const InputDecoration(
-                      icon: const Icon(Icons.email),
-                      hintText: 'Enter a departure date',
-                      labelText: 'Departure date:',
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 20, right: 20.0, bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DatePicker((DateTime pickedTime) {
+                          setState(() {
+                            departures = pickedTime;
+                          });
+                        }, label: 'Departures date'),
+                         Text(formatter.format(departures)),
+                      ],
                     ),
-                    keyboardType: TextInputType.emailAddress,
                   ),
-                  new TextFormField(
-                    decoration: const InputDecoration(
-                      icon: const Icon(Icons.email),
-                      hintText: 'Enter a your arrival date',
-                      labelText: 'Arrival date:',
+
+
+                  Padding(
+                    padding: EdgeInsets.only(right: 20.0, bottom: 10.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        DatePicker((DateTime pickedTime) {
+                          setState(() {
+                            arrives = pickedTime;
+                          });
+                        }, label: 'Arrival date'),
+                        Text(formatter.format(arrives)),
+                      ],
                     ),
-                    keyboardType: TextInputType.emailAddress,
                   ),
-                  new TextFormField(
+
+
+                  new TextField(
                     decoration: const InputDecoration(
-                      icon: const Icon(Icons.email),
+                      icon: const Icon(Icons.attach_money),
                       hintText: 'Enter cost per regel',
                       labelText: 'Cost per regel:',
                     ),
-                    keyboardType: TextInputType.emailAddress,
                   ),
-                  new FormField(
-                    builder: (FormFieldState state) {
-                      return InputDecorator(
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.color_lens),
-                          labelText: 'Color',
-                        ),
-                        isEmpty: _color == '',
-                        child: new DropdownButtonHideUnderline(
-                          child: new DropdownButton(
-                            value: _color,
-                            isDense: true,
-                            onChanged: (String newValue) {
-                              setState(() {
-//                                newContact.favoriteColor = newValue;
-//                                _color = newValue;
-                                state.didChange(newValue);
-                              });
-                            },
-                            items: _colors.map((String value) {
-                              return new DropdownMenuItem(
-                                value: value,
-                                child: new Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
+
                   new Container(
                       padding: const EdgeInsets.only(left: 40.0, top: 20.0),
                       child: new RaisedButton(
