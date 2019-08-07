@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:openship/screens/login/user_id.dart';
 import 'styles.dart';
 import 'loginAnimation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'dart:async';
-import '../../Components/SignUpLink.dart';
+import 'package:uuid/uuid.dart';
 import '../../Components/Form.dart';
 import '../../Components/SignInButton.dart';
 import 'package:flutter/services.dart';
@@ -100,7 +101,6 @@ class LoginScreenState extends State<LoginScreen>
                             color: Colors.white,
                             fontSize: 23.2),),
                             FormContainer(),
-                            SignUp()
                           ],
                         ),
                         animationStatus == 0
@@ -110,6 +110,7 @@ class LoginScreenState extends State<LoginScreen>
                                     onTap: () {
                                       setState(() {
                                         animationStatus = 1;
+                                        UserId().userId = Uuid().v4();
                                       });
                                       _playAnimation();
                                     },
