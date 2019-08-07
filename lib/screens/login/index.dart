@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openship/Components/background.dart';
 import 'package:openship/screens/login/user_id.dart';
 import 'package:uuid/uuid.dart';
 import 'styles.dart';
@@ -54,17 +55,7 @@ class LoginScreenState extends State<LoginScreen>
               image: backgroundImage,
             ),
             child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: <Color>[
-                    const Color.fromRGBO(162, 146, 199, 0.8),
-                    const Color.fromRGBO(51, 51, 63, 0.9),
-                  ],
-                  stops: [0.2, 1.0],
-                  begin: const FractionalOffset(0.0, 0.0),
-                  end: const FractionalOffset(0.0, 1.0),
-                ),
-              ),
+              decoration: BackgroundDecoration.get(),
               child: Center(
                 child: ListView(
                   padding: const EdgeInsets.all(0.0),
