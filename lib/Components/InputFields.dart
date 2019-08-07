@@ -9,7 +9,7 @@ class InputFieldArea extends StatefulWidget {
   final TextListener textListener;
   final TextEditingController _textEditingController = TextEditingController();
 
-  InputFieldArea({this.hint, this.obscure, this.icon, this.textListener});
+  InputFieldArea(this.textListener, {this.hint, this.obscure, this.icon});
 
   @override
   State<StatefulWidget> createState() => InputFieldAreaState();

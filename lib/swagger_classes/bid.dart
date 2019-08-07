@@ -15,7 +15,7 @@ class Bid{
       id: shipmentJson['id'],
       buyerId: shipmentJson['buyerId'],
       shipmentId: shipmentJson['shipmentId'],
-      dimensions: Dimensions.fromJson(json.decode(shipmentJson['dimensions'])),
+      dimensions: Dimensions.fromJson(shipmentJson['dimensions']),
     );
   }
 }

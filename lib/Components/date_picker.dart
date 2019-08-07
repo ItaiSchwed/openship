@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 
+typedef DateListener = void Function(DateTime pickedTime);
+
 class DatePicker extends StatefulWidget {
+  final DateListener dateListener;
+  final String label;
+
+  DatePicker(this.dateListener, {this.label});
+
   @override
   State createState() => _DatePickerState();
 }
 
 //State is information of the application that can change over time or when some actions are taken.
-class _DatePickerState extends State<DatePicker>{
-
-  String _value = '';
-
+class _DatePickerState extends State<DatePicker> {
   Future _selectDate() async {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2016),
-        lastDate: DateTime(2020)
-    );
-    if(picked != null) setState(() => _value = picked.toString());
+        lastDate: DateTime(2020));
+    if (picked != null) setState(() => widget.dateListener(picked));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: EdgeInsets.all(32.0),
-        child: Center(
-          child: Column(
-            children: <Widget>[
-              Text(_value),
-              RaisedButton(onPressed: _selectDate, child: Text('Click me'),)
-            ],
+    return GestureDetector(
+      onTap: _selectDate,
+      child: Row(
+        children: <Widget>[
+          Text(
+            widget.label + " ",
+            style: TextStyle(fontSize: 17.0,
+            color: Colors.black.withOpacity(0.5)),
           ),
-        ),
+          Icon(Icons.date_range, color: Colors.blue),
+        ],
+      ),
     );
   }
 }

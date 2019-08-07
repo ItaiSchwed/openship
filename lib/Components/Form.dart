@@ -15,12 +15,12 @@ class FormContainer extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               new InputFieldArea(
+                (String text) {
+                  UserId().name = text;
+                },
                 hint: "Username",
                 obscure: false,
                 icon: Icons.person_outline,
-                textListener: (String text){
-                  UserId().name = text;
-                },
               ),
             ],
           )),
