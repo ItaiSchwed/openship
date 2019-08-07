@@ -7,5 +7,6 @@ class UserId {
     return _instance;
   }
 
+  String name;
   String userId;
 }

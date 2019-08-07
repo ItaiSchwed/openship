@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openship/screens/login/user_id.dart';
 import './InputFields.dart';
 
 class FormContainer extends StatelessWidget {
@@ -17,6 +18,9 @@ class FormContainer extends StatelessWidget {
                 hint: "Username",
                 obscure: false,
                 icon: Icons.person_outline,
+                textListener: (String text){
+                  UserId().name = text;
+                },
               ),
             ],
           )),

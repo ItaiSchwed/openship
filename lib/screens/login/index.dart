@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:openship/screens/login/user_id.dart';
+import 'package:uuid/uuid.dart';
 import 'styles.dart';
 import 'loginAnimation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/animation.dart';
 import 'dart:async';
-import 'package:uuid/uuid.dart';
+import '../../Components/SignUpLink.dart';
 import '../../Components/Form.dart';
 import '../../Components/SignInButton.dart';
 import 'package:flutter/services.dart';
@@ -14,7 +15,7 @@ import 'package:flutter/scheduler.dart' show timeDilation;
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key key}) : super(key: key);
   @override
-  LoginScreenState createState() => new LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
 class LoginScreenState extends State<LoginScreen>
@@ -24,8 +25,8 @@ class LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
-    _loginButtonController = new AnimationController(
-        duration: new Duration(milliseconds: 3000), vsync: this);
+    _loginButtonController = AnimationController(
+        duration: Duration(milliseconds: 3000), vsync: this);
   }
 
   @override
@@ -41,42 +42,20 @@ class LoginScreenState extends State<LoginScreen>
     } on TickerCanceled {}
   }
 
-  Future<bool> _onWillPop() {
-    return showDialog(
-          context: context,
-          child: new AlertDialog(
-            title: new Text('Are you sure?'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text('No'),
-              ),
-              new FlatButton(
-                onPressed: () =>
-                    Navigator.pushReplacementNamed(context, "/home"),
-                child: new Text('Yes'),
-              ),
-            ],
-          ),
-        ) ??
-        false;
-  }
-
   @override
   Widget build(BuildContext context) {
+    String name = '';
     timeDilation = 0.4;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: new Scaffold(
+    return Scaffold(
         body: Center(
-          child: new Container(
-            decoration: new BoxDecoration(
+          child: Container(
+            decoration: BoxDecoration(
               image: backgroundImage,
             ),
-            child: new Container(
-              decoration: new BoxDecoration(
-                gradient: new LinearGradient(
+            child: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
                   colors: <Color>[
                     const Color.fromRGBO(162, 146, 199, 0.8),
                     const Color.fromRGBO(51, 51, 63, 0.9),
@@ -101,12 +80,13 @@ class LoginScreenState extends State<LoginScreen>
                             color: Colors.white,
                             fontSize: 23.2),),
                             FormContainer(),
+                            SignUp()
                           ],
                         ),
                         animationStatus == 0
-                            ? new Padding(
+                            ? Padding(
                                 padding: const EdgeInsets.only(bottom: 50.0),
-                                child: new InkWell(
+                                child: InkWell(
                                     onTap: () {
                                       setState(() {
                                         animationStatus = 1;
@@ -114,9 +94,9 @@ class LoginScreenState extends State<LoginScreen>
                                       });
                                       _playAnimation();
                                     },
-                                    child: new SignIn()),
+                                    child: SignIn()),
                               )
-                            : new StaggerAnimation(
+                            : StaggerAnimation(
                                 buttonController: _loginButtonController.view),
                       ],
                     ),
@@ -126,7 +106,6 @@ class LoginScreenState extends State<LoginScreen>
             ),
           ),
         ),
-      ),
     );
   }
 }
