@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:openship/screens/buyer_bids/buyer_bids.dart';
 import 'package:openship/screens/buyer_shipments/buyer_shipments.dart';
 import 'package:openship/screens/login/index.dart';
 import 'package:openship/screens/user_menu/index.dart';
@@ -33,6 +34,10 @@ class Routes {
             return new MyCustomRoute(
               builder: (_) => new ContainerRegistration(),
               settings: settings,
+            );
+          case '/buyer_bids':
+            return new MyCustomRoute(
+              builder: (_) => new BuyerBids(),
             );
           default:
             return new MyCustomRoute(

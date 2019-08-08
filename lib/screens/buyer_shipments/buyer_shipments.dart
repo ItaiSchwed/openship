@@ -25,7 +25,7 @@ class BuyerShipments extends StatelessWidget {
       body: ListView.builder(
         itemBuilder: (context, position) {
           return GestureDetector(
-            onTap: _generateOnTapBid(shipments[position].id),
+            onTap: _generateOnTapBid(context, shipments[position].id),
             child: Column(
               children: <Widget>[
                 Row(
@@ -94,17 +94,20 @@ class BuyerShipments extends StatelessWidget {
     );
   }
 
-  Function _generateOnTapBid(String shipmentId) {
+  Function _generateOnTapBid(BuildContext context, String shipmentId) {
     Bid bid = Bid(
         buyerId: UserId().userId,
         id: Uuid().v4(),
         shipmentId: shipmentId,
         dimensions: Dimensions(height: 0, length: bidDimensions, width: 0));
     Map<String, String> headers = {
-      'Content-type' : 'application/json',
+      'Content-type': 'application/json',
     };
 
-    return () => http.post(Constants.baseUrl + Constants.bidsUrl,
-        body: json.encode(bid.toMap()), headers: headers );
+    return () {
+      http.post(Constants.baseUrl + Constants.bidsUrl,
+          body: json.encode(bid.toMap()), headers: headers);
+      Navigator.pushNamed(context, '/buyer_bids');
+    };
   }
 }

@@ -37,12 +37,15 @@ class BuyerBidsState extends State<BuyerBids> {
         itemBuilder: (context, position) {
           return GestureDetector(
 //            todo: onTap: _generateOnTapBid(shipments[position].id),
-            child: Column(
+            child: Row(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
                   child: Text(
-                    "  Shipment Id: " + bids[position].shipmentId,
+                    "  Shipment Id: " +
+                        (bids[position].shipmentId.length > 5
+                            ? bids[position].shipmentId.substring(0, 5)
+                            : bids[position].shipmentId),
                     style: TextStyle(fontSize: 18.0),
                   ),
                 ),
@@ -53,7 +56,7 @@ class BuyerBidsState extends State<BuyerBids> {
                     children: <Widget>[
                       Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: _getIconBySale(bids[position].shipmentId)),
+                          child: _getIconBySale(bids[position].id)),
                     ],
                   ),
                 ),
@@ -70,7 +73,7 @@ class BuyerBidsState extends State<BuyerBids> {
     );
   }
 
-  void _initializeBids() async {
+  Future _initializeBids() async {
     final response = await http.get(
         Constants.baseUrl + Constants.bidsUrl + '?buyerId=${UserId().userId}');
 
@@ -89,7 +92,7 @@ class BuyerBidsState extends State<BuyerBids> {
     });
   }
 
-  void _initializeSales() async {
+  Future _initializeSales() async {
     final response = await http.get(
         Constants.baseUrl + Constants.salesUrl + '?buyerId=${UserId().userId}');
     setState(() {
@@ -107,7 +110,20 @@ class BuyerBidsState extends State<BuyerBids> {
     });
   }
 
-  _getIconBySale(String shipmentId) {
-
+  Icon _getIconBySale(String bidId) {
+    if (sales.firstWhere((Sale sale) => sale.bidId == bidId,
+            orElse: () => null) !=
+        null) {
+      return Icon(
+        Icons.check,
+        size: 35.0,
+        color: Colors.green,
+      );
+    }
+    return Icon(
+      Icons.close,
+      size: 35.0,
+      color: Colors.red,
+    );
   }
 }
