@@ -54,8 +54,14 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        bottom: TabBar(
+          tabs: [
+            Tab(text: 'BUYER'),
+            Tab(text: 'SELLER'),
+          ],
+        ),
       ),
       body: new SafeArea(
           top: false,

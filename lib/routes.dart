@@ -4,14 +4,14 @@ import 'package:openship/screens/buyer_shipments/buyer_shipments.dart';
 import 'package:openship/screens/login/index.dart';
 import 'package:openship/screens/user_menu/index.dart';
 import 'package:openship/swagger_classes/shipment.dart';
-import 'package:openship/screens/container_registration//index.dart';
+import 'package:openship/tabs/container_registration.dart';
 
 class Routes {
   Routes() {
     runApp(new MaterialApp(
       title: "Dribbble Animation App",
       debugShowCheckedModeBanner: false,
-      home: new ContainerRegistration(),
+      home: new LoginScreen(),
       onGenerateRoute: (RouteSettings settings) {
         switch (settings.name) {
           case '/login':
@@ -29,11 +29,6 @@ class Routes {
                 as Map<String, dynamic>)['shipments'] as List<Shipment>;
             return new MyCustomRoute(
               builder: (_) => new BuyerShipments(bidDimensions, shipments),
-            );
-          case '/container_registration':
-            return new MyCustomRoute(
-              builder: (_) => new ContainerRegistration(),
-              settings: settings,
             );
           case '/buyer_bids':
             return new MyCustomRoute(

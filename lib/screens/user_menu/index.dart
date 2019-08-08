@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:openship/Components/background.dart';
+import 'package:openship/tabs/container_registration.dart';
 import 'package:openship/tabs/search_form.dart';
-import 'package:openship/screens/login/styles.dart';
 
 class UserMenu extends StatelessWidget {
   @override
@@ -11,20 +10,20 @@ class UserMenu extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          bottom: TabBar(
-            tabs: [
-              Tab(text: 'SELLER'),
-              Tab(text: 'BUYER'),
-            ],
-          ),
-        ),
-        body: SingleChildScrollView(
-          child: Center(
-            child: SearchForm(),
+          appBar: AppBar(
+            backgroundColor: Colors.black,
+            bottom: TabBar(
+              tabs: [
+                Tab(text: 'BUYER'),
+                Tab(text: 'SELLER'),
+              ],
             ),
-        ),
+          ),
+              body: SingleChildScrollView(
+                child: Center(
+                  child: ContainerRegistration(),
+                ),
+              ),
       ),
     );
   }

@@ -78,7 +78,7 @@ class StaggerAnimation extends StatelessWidget {
                         buttomZoomOut.value == 70 ? 60.0 : buttomZoomOut.value,
                     alignment: FractionalOffset.center,
                     decoration: new BoxDecoration(
-                      color: const Color.fromRGBO(247, 64, 106, 1.0),
+                      color: Colors.blue,
                       borderRadius: buttomZoomOut.value < 400
                           ? new BorderRadius.all(const Radius.circular(30.0))
                           : new BorderRadius.all(const Radius.circular(0.0)),
