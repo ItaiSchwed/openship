@@ -7,7 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'package:openship/comstants.dart';
 import 'package:openship/screens/login/user_id.dart';
+import 'package:openship/swagger_classes/bid.dart';
 import 'package:openship/swagger_classes/shipment.dart';
+import 'package:uuid/uuid.dart';
 
 class SearchForm extends StatefulWidget {
   @override
@@ -15,12 +17,11 @@ class SearchForm extends StatefulWidget {
 }
 
 class _SearchFormState extends State<SearchForm> {
-
   String source;
   String destination;
   DateTime departures = DateTime.now();
   DateTime arrives = DateTime.now();
-  String desirableArea;
+  int desirableArea;
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +104,7 @@ class _SearchFormState extends State<SearchForm> {
                   keyboardType: TextInputType.number,
                   onChanged: (String text) {
                     setState(() {
-                      desirableArea = text;
+                      desirableArea = int.parse(text);
                     });
                   },
                   decoration: InputDecoration(
@@ -159,7 +160,8 @@ class _SearchFormState extends State<SearchForm> {
           .map((shipment) => Shipment.fromJson(shipment))
           .toList()
           .cast<Shipment>();
-      Navigator.pushNamed(context, '/buyer_shipments', arguments: shipments);
+      Navigator.pushNamed(context, '/buyer_shipments',
+          arguments: {'bidDimensions': desirableArea, 'shipments': shipments});
     } else {
       // If that response was not OK, throw an error.
       throw Exception('Failed to load post');

@@ -108,7 +108,7 @@ class StaggerAnimation extends StatelessWidget {
                       shape: buttomZoomOut.value < 500
                           ? BoxShape.circle
                           : BoxShape.rectangle,
-                      color: const Color.fromRGBO(247, 64, 106, 1.0),
+                      color: Colors.blue,
                     ),
                   ),
           )),

@@ -21,9 +21,12 @@ class Routes {
               builder: (_) => new UserMenu(),
             );
           case '/buyer_shipments':
-            final List<Shipment> shipments = settings.arguments;
+            final int bidDimensions = (settings.arguments
+                as Map<String, dynamic>)['bidDimensions'] as int;
+            final List<Shipment> shipments = (settings.arguments
+                as Map<String, dynamic>)['shipments'] as List<Shipment>;
             return new MyCustomRoute(
-              builder: (_) => new BuyerShipments(shipments),
+              builder: (_) => new BuyerShipments(bidDimensions, shipments),
             );
           default:
             return new MyCustomRoute(
