@@ -21,7 +21,7 @@ class _SearchFormState extends State<SearchForm> {
   String destination;
   DateTime departures = DateTime.now();
   DateTime arrives = DateTime.now();
-  int desirableArea;
+  int desirableArea = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -148,9 +148,9 @@ class _SearchFormState extends State<SearchForm> {
     final response = await http.get(Constants.baseUrl +
         Constants.shipmentsUrl +
         '?departDate=${Constants.sendFormatter.format(departures)}' +
-        '?arriveDate=${Constants.sendFormatter.format(arrives)}' +
-        '?srcPort=$source' +
-        '?dstPort=$destination');
+        ',arriveDate=${Constants.sendFormatter.format(arrives)}' +
+        ',srcPort=$source' +
+        ',dstPort=$destination');
     //todo: desirable area
 
     if (response.statusCode == 200) {

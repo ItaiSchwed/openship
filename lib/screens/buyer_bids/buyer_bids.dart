@@ -36,23 +36,35 @@ class BuyerBidsState extends State<BuyerBids> {
       body: ListView.builder(
         itemBuilder: (context, position) {
           return GestureDetector(
-//            todo: onTap: _generateOnTapBid(shipments[position].id),
             child: Row(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
-                  child: Text(
-                    "  Shipment Id: " +
-                        (bids[position].shipmentId.length > 5
-                            ? bids[position].shipmentId.substring(0, 5)
-                            : bids[position].shipmentId),
-                    style: TextStyle(fontSize: 18.0),
-                  ),
+                Column(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
+                      child: Text(
+                        "  Shipment Id: " +
+                            (bids[position].shipmentId.length > 5
+                                ? bids[position].shipmentId.substring(0, 5)
+                                : bids[position].shipmentId),
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(12.0, 12.0, 12.0, 6.0),
+                      child: Text(
+                        "  Area: " +
+                            bids[position].dimensions.length.toString() + ' [sq. ft]',
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+
+                  ],
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Padding(
                           padding: const EdgeInsets.all(8.0),
