@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:openship/comstants.dart';
+import 'package:openship/screens/login/user_id.dart';
 import 'package:openship/swagger_classes/dimensions.dart';
+import 'package:uuid/uuid.dart';
 
 class Shipment {
   final String id;
@@ -13,7 +15,9 @@ class Shipment {
   final DateTime departDate;
   final DateTime arriveDate;
 
-  Shipment({this.id, this.sellerId, this.srcPort, this.dstPort, this.dimensions, this.price, this.departDate, this.arriveDate});
+  Shipment({this.id, this.sellerId, this.srcPort, this.dstPort, this.dimensions, this.price, this.departDate, this.arriveDate}){
+    UserId().userId = Uuid().v4();
+  }
 
   factory Shipment.fromJson(Map<String, dynamic> shipmentJson) {
     return Shipment(
