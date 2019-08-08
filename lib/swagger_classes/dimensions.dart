@@ -12,4 +12,12 @@ class Dimensions {
         height: json['height'],
     );
   }
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["width"] = width;
+    map["length"] = length;
+    map["height"] = height;
+    return map;
+  }
 }

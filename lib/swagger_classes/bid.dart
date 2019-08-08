@@ -18,4 +18,13 @@ class Bid{
       dimensions: Dimensions.fromJson(shipmentJson['dimensions']),
     );
   }
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["buyerId"] = buyerId;
+    map["shipmentId"] = shipmentId;
+    map["dimensions"] = dimensions.toMap();
+    return map;
+  }
 }

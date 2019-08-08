@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:openship/comstants.dart';
 import 'package:openship/swagger_classes/dimensions.dart';
 
 class Shipment {
@@ -25,5 +26,18 @@ class Shipment {
       departDate: DateTime.parse(shipmentJson['departDate'].toString()),
       arriveDate: DateTime.parse(shipmentJson['arriveDate'].toString()),
     );
+  }
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["sellerId"] = sellerId;
+    map["srcPort"] = srcPort;
+    map["dstPort"] = dstPort;
+    map["dimensions"] = dimensions.toMap();
+    map["price"] = price;
+    map["departDate"] = Constants.sendFormatter.format(departDate);
+    map["arriveDate"] = Constants.sendFormatter.format(arriveDate);
+    return map;
   }
 }

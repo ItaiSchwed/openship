@@ -10,4 +10,11 @@ class User{
       name: shipmentJson['name'],
     );
   }
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["name"] = name;
+    return map;
+  }
 }

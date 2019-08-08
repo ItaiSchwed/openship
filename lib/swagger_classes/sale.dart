@@ -16,4 +16,14 @@ class Sale{
       bidId: shipmentJson['bidId'],
     );
   }
+
+  Map toMap() {
+    var map = new Map<String, dynamic>();
+    map["id"] = id;
+    map["buyerId"] = buyerId;
+    map["sellerId"] = sellerId;
+    map["shipmentId"] = shipmentId;
+    map["bidId"] = bidId;
+    return map;
+  }
 }
