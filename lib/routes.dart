@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:openship/screens/buyer_shipments/buyer_shipments.dart';
 import 'package:openship/screens/login/index.dart';
 import 'package:openship/screens/user_menu/index.dart';
+import 'package:openship/swagger_classes/shipment.dart';
 
 class Routes {
   Routes() {
@@ -13,17 +15,19 @@ class Routes {
           case '/login':
             return new MyCustomRoute(
               builder: (_) => new LoginScreen(),
-              settings: settings,
             );
           case '/user_menu':
             return new MyCustomRoute(
               builder: (_) => new UserMenu(),
-              settings: settings,
+            );
+          case '/buyer_shipments':
+            final List<Shipment> shipments = settings.arguments;
+            return new MyCustomRoute(
+              builder: (_) => new BuyerShipments(shipments),
             );
           default:
             return new MyCustomRoute(
               builder: (_) => new LoginScreen(),
-              settings: settings,
             );
         }
       },

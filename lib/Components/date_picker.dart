@@ -19,7 +19,7 @@ class _DatePickerState extends State<DatePicker> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(2016),
-        lastDate: DateTime(2020));
+        lastDate: DateTime(2030));
     if (picked != null) setState(() => widget.dateListener(picked));
   }
 

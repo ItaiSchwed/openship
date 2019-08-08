@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:openship/Components/background.dart';
-import 'package:openship/Components/search_form.dart';
+import 'package:openship/tabs/search_form.dart';
 import 'package:openship/screens/login/styles.dart';
 
 class UserMenu extends StatelessWidget {
@@ -22,10 +22,8 @@ class UserMenu extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Center(
-            child: Column(
-              children: <Widget>[SearchForm()],
+            child: SearchForm(),
             ),
-          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class Shipment {
       srcPort: shipmentJson['srcPort'],
       dstPort: shipmentJson['dstPort'],
       dimensions: Dimensions.fromJson(shipmentJson['dimensions']),
-      price: int.parse(shipmentJson['price']),
+      price: shipmentJson['price'],
       departDate: DateTime.parse(shipmentJson['departDate'].toString()),
       arriveDate: DateTime.parse(shipmentJson['arriveDate'].toString()),
     );
